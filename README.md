@@ -7,7 +7,7 @@ An OCI container image to run blawar's [NUT](https://github.com/blawar/nut) as a
 The container can be launched with a container runtime like Docker or Podman, for example:
 
 ```
-podman run -d --name=nut -p 9000:9000 -v nut-data:/app/titledb:rw -v /path/to/roms:/roms:ro -e USERNAME=guest -e PASSWORD=guest jntesteves/nut
+podman run -d --name=nut -p 9000:9000 -v nut-data:/app/titledb:rw -v /path/to/roms:/roms:ro,z -e USERNAME=guest -e PASSWORD=guest jntesteves/nut
 ```
 
 You should replace `/path/to/roms` with the path to the directory containing your ROM dumps, and preferably set USERNAME and PASSWORD to safer values. These are the username and password that you will use in [Tinfoil](https://tinfoil.io/) to connect to your NUT server.
@@ -15,7 +15,7 @@ You should replace `/path/to/roms` with the path to the directory containing you
 If you already have a `users.conf` file with all your username-password pairs, you can use it instead of passing the USERNAME and PASSWORD environment variables on the command-line, just mount it into the container using a volume:
 
 ```
-podman run -d --name=nut -p 9000:9000 -v nut-data:/app/titledb:rw -v /path/to/roms:/roms:ro /path/to/users.conf:/app/conf/users.conf:ro jntesteves/nut
+podman run -d --name=nut -p 9000:9000 -v nut-data:/app/titledb:rw -v /path/to/roms:/roms:ro,z /path/to/users.conf:/app/conf/users.conf:ro jntesteves/nut
 ```
 
 While the container is up, a background process will keep scanning for new ROMs every 30 seconds by default. This timer can be overridden with the variable `-v SCAN_WAIT=30`, with the value in seconds. This process is done by calling the public HTTP API. The user passed in the USERNAME variable is used for this process. If a USERNAME isn't provided on the command-line, the first user found in the `users.conf` file is used instead.
