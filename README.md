@@ -22,7 +22,7 @@ While the container is up, a background process will keep scanning for new ROMs 
 
 ## Building the image
 
-Clone this repository with git. The image can be built locally using the provided ./make script. If omitted, TAG will be `nut` by default.
+Clone [this repository](https://codeberg.org/jntesteves/nut-container) with git. The image can be built locally using the provided ./make script. If omitted, TAG will be `nut` by default.
 
 ```
 # Build the image
