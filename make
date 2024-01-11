@@ -6,15 +6,21 @@ param TAG=nut
 param USERNAME=guest
 param PASSWORD=guest
 script_files=$(wildcard ./*.sh ./make)
-engine=podman
-command -v "${engine}" >/dev/null || engine=docker
+
+set_engine() {
+	engine=podman
+	command -v "${engine}" >/dev/null || engine=docker
+	command -v "${engine}" >/dev/null || abort 'No container engine found. Either Podman or Docker is required to build and run this app'
+}
 
 for __target in $(list_targets); do
 	case "${__target}" in
 	build | -)
+		set_engine
 		run "${engine}" build -t "${TAG}" .
 		;;
 	run)
+		set_engine
 		run "${engine}" run \
 			-it --rm \
 			--name nut \
