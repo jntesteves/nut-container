@@ -16,8 +16,8 @@ for __target in $(list_targets); do
 		;;
 	run)
 		run "${engine}" run \
-			--name nut \
 			-it --rm \
+			--name nut \
 			--security-opt=label=disable \
 			-p 9000:9000 \
 			-v nut-data:/app/titledb:noexec,rw \

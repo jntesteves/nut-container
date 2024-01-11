@@ -18,5 +18,5 @@ COPY entrypoint.sh /
 COPY nut-scan-daemon.sh /
 ENTRYPOINT ["/entrypoint.sh"]
 VOLUME ["/roms", "/app/titledb"]
-ENV ID=guest PASSWORD=guest
+ENV USERNAME=guest PASSWORD=guest
 CMD ["python", "/app/nut.py", "--server"]
